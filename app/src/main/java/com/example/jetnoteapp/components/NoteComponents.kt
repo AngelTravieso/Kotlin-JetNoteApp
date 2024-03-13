@@ -1,7 +1,9 @@
 package com.example.jetnoteapp.components
 
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -30,7 +32,7 @@ fun NoteInputText(
         value = text,
         onValueChange = onTextChange,
         colors = TextFieldDefaults.textFieldColors(
-            Color.Transparent
+            Color.Black
         ),
         maxLines = maxLine,
         label = {
@@ -45,4 +47,16 @@ fun NoteInputText(
         }),
         modifier = modifier
     )
+}
+
+@Composable
+fun NoteButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit,
+    enable: Boolean = true
+) {
+    Button(onClick = onClick, shape = CircleShape, enabled = enable, modifier = modifier) {
+        Text(text)
+    }
 }
