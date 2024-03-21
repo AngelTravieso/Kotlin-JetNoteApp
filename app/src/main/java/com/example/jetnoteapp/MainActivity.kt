@@ -3,6 +3,7 @@ package com.example.jetnoteapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -13,8 +14,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetnoteapp.data.NotesDataSource
 import com.example.jetnoteapp.model.Note
+import com.example.jetnoteapp.screen.NoteViewModel
 import com.example.jetnoteapp.screen.NotesScreen
 import com.example.jetnoteapp.ui.theme.JetNoteAppTheme
 
@@ -27,20 +30,24 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
-
-                    val notes = remember {
-                        mutableStateListOf<Note>()
-                    }
-
-                    NotesScreen(notes = notes, onAddNote = {
-                        notes.add(it)
-                    }, onRemoveNote = {
-                        notes.remove(it)
-                    })
+                    val noteViewModel: NoteViewModel by viewModels()
+                    NotesApp(noteViewModel)
                 }
             }
         }
     }
+}
+
+@Composable
+fun NotesApp(noteViewModel: NoteViewModel = viewModel()) {
+
+    val notesList = noteViewModel.getAllNotes()
+
+    NotesScreen(notes = notesList, onAddNote = {
+        noteViewModel.addNote(it)
+    }, onRemoveNote = {
+        noteViewModel.removeNote(it)
+    })
 }
 
 
