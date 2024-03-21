@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -51,7 +53,20 @@ android {
 
 dependencies {
 
+    val room_version = "2.6.1"
+
+    // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
+    // Hilt-Dagger
+    implementation("com.google.dagger:hilt-android:2.44")
+    ksp("com.google.dagger:hilt-android-compiler:2.44")
+
+    // Room
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
