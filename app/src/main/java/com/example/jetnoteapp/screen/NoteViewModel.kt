@@ -19,13 +19,15 @@ class NoteViewModel @Inject constructor(private val repository: NoteRepository) 
     private val _noteList = MutableStateFlow<List<Note>>(emptyList())
     val noteList = _noteList.asStateFlow()
 
+
+
     init {
 
         viewModelScope.launch(Dispatchers.IO) {
             repository.getAllNotes().distinctUntilChanged().collect { listOfNotes ->
-                if (listOfNotes.isNotEmpty()) {
-                    Log.d("Empty", "Empty list")
-                } else {
+                if (listOfNotes.isNullOrEmpty()) {
+                    Log.d("Empty", ": Empty list")
+                }else {
                     _noteList.value = listOfNotes
                 }
             }
@@ -34,7 +36,10 @@ class NoteViewModel @Inject constructor(private val repository: NoteRepository) 
         //noteList.addAll(NotesDataSource().loadNotes())
     }
 
-    fun addNote(note: Note) = viewModelScope.launch { repository.addNote(note) }
+    fun addNote(note: Note) = viewModelScope.launch {
+
+        repository.addNote(note)
+    }
 
     fun updateNote(note: Note) = viewModelScope.launch { repository.updateNote(note) }
 

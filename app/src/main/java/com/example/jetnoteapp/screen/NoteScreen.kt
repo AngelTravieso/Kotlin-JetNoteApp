@@ -37,12 +37,15 @@ import com.example.jetnoteapp.components.NoteButton
 import com.example.jetnoteapp.components.NoteInputText
 import com.example.jetnoteapp.data.NotesDataSource
 import com.example.jetnoteapp.model.Note
+import com.example.jetnoteapp.utils.formatDate
 import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesScreen(
-    notes: List<Note>, onAddNote: (Note) -> Unit, onRemoveNote: (Note) -> Unit
+    notes: List<Note>,
+    onAddNote: (Note) -> Unit,
+    onRemoveNote: (Note) -> Unit
 ) {
 
     var title by remember {
@@ -137,9 +140,8 @@ fun NoteRow(
             horizontalAlignment = Alignment.Start) {
             Text(text = note.title, style = MaterialTheme.typography.titleMedium)
             Text(text = note.description, style = MaterialTheme.typography.titleSmall)
-            // . format(DateTimeFormatter.ofPattern("EEE, d MMM")),
             /*Text(
-                text = note.entryDate.toString(),
+                text = formatDate(note.entryDate.time),
                 style = MaterialTheme.typography.bodyMedium
             )*/
         }

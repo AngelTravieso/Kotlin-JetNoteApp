@@ -26,6 +26,6 @@ class NoteRepository @Inject constructor(private val noteDatabaseDao: NoteDataba
      *
      * getAllNotes() es proporcionar un flujo de listas de notas desde una base de datos, el cual se ejecuta en un contexto de I/O para no bloquear el hilo principal y usa conflate para asegurarse de que solo se procese el último valor emitido en caso de que haya una acumulación de valores no procesados. Este patrón es común en aplicaciones que utilizan arquitecturas reactivas y desean mostrar los datos más recientes, como la última lista de notas en una aplicación de notas.
      */
-    suspend fun getAllNotes(): Flow<List<Note>> =
+    fun getAllNotes(): Flow<List<Note>> =
         noteDatabaseDao.getNotes().flowOn(Dispatchers.IO).conflate()
 }

@@ -11,8 +11,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class) // Las dependencias proporcionadas estarán disponibles en toda la aplicación y compartirán una única instancia
 @Module // Se para especificar en qué componente de Hilt debe instalarse el módulo
+@InstallIn(SingletonComponent::class) // Las dependencias proporcionadas estarán disponibles en toda la aplicación y compartirán una única instancia
 class AppModule {
 
     @Singleton // se indica que dicha dependencia debe tener una instancia única durante toda la vida de la aplicación
@@ -25,6 +25,12 @@ class AppModule {
     @Singleton
     @Provides
     fun provideAppDatabase(@ApplicationContext context: Context): NoteDatabase =
-        Room.databaseBuilder(context, NoteDatabase::class.java, "notes_db").build()
+        Room.databaseBuilder(
+            context,
+            NoteDatabase::class.java,
+            "notes_db"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
 
 }
