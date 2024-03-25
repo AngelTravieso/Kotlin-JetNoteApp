@@ -17,6 +17,7 @@ import com.example.jetnoteapp.screen.NotesScreen
 import com.example.jetnoteapp.ui.theme.JetNoteAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+// Se utiliza para especificar que Android classes pueden recibir inyecciones de dependencias de Hilt.
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

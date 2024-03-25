@@ -11,11 +11,14 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
-@Module
+@InstallIn(SingletonComponent::class) // Las dependencias proporcionadas estarán disponibles en toda la aplicación y compartirán una única instancia
+@Module // Se para especificar en qué componente de Hilt debe instalarse el módulo
 class AppModule {
 
-    @Singleton
+    @Singleton // se indica que dicha dependencia debe tener una instancia única durante toda la vida de la aplicación
+    /**
+     * @Provides es una anotación de Dagger que se usa en métodos dentro de un módulo para indicar que ese método es el proveedor de una dependencia. El objeto retornado por el método se utilizará para satisfacer las dependencias en otras partes de la aplicación donde esa clase o interfaz se requiera.
+     */
     @Provides
     fun provideNotesDao(noteDatabase: NoteDatabase): NoteDatabaseDao = noteDatabase.noteDao()
 
