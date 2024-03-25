@@ -1,10 +1,8 @@
 package com.example.jetnoteapp.screen
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetnoteapp.data.NotesDataSource
 import com.example.jetnoteapp.model.Note
 import com.example.jetnoteapp.repository.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,12 +34,12 @@ class NoteViewModel @Inject constructor(private val repository: NoteRepository) 
         //noteList.addAll(NotesDataSource().loadNotes())
     }
 
-    suspend fun addNote(note: Note) = viewModelScope.launch { repository.addNote(note) }
+    fun addNote(note: Note) = viewModelScope.launch { repository.addNote(note) }
 
-    suspend fun updateNote(note: Note) = viewModelScope.launch { repository.updateNote(note) }
+    fun updateNote(note: Note) = viewModelScope.launch { repository.updateNote(note) }
 
-    suspend fun deleteNote(note: Note) = viewModelScope.launch { repository.deleteNote(note) }
+    fun deleteNote(note: Note) = viewModelScope.launch { repository.deleteNote(note) }
 
-    suspend fun deleteAllNotes() = viewModelScope.launch { repository.deleteAllNotes() }
+    fun deleteAllNotes() = viewModelScope.launch { repository.deleteAllNotes() }
 
 }
