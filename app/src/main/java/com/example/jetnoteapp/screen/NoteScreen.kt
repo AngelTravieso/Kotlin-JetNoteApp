@@ -140,10 +140,10 @@ fun NoteRow(
             horizontalAlignment = Alignment.Start) {
             Text(text = note.title, style = MaterialTheme.typography.titleMedium)
             Text(text = note.description, style = MaterialTheme.typography.titleSmall)
-            /*Text(
+            Text(
                 text = formatDate(note.entryDate.time),
                 style = MaterialTheme.typography.bodyMedium
-            )*/
+            )
         }
     }
 }
